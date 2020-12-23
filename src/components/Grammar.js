@@ -1,33 +1,19 @@
 import React from 'react';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 
 class Grammar extends React.Component{
     render() {
         return (
-            <div>
-                <GrammarPart id={this.props.id} content={this.props.content}/>
-                <GrammarCheck check={this.props.check}/>
-            </div>
+            <TableRow>
+                <TableCell>{this.props.id}</TableCell>
+                <TableCell>{this.props.content}</TableCell>
+                <TableCell>{this.props.comment}</TableCell>
+                <TableCell>{this.props.check}</TableCell>
+            </TableRow>
         )
     }
 }
 
-class GrammarPart extends React.Component {
-    render() {
-        return (
-            <div>
-                <h2>{this.props.content}[{this.props.id}]</h2>
-            </div>
-        )
-    }
-}
 
-class GrammarCheck extends React.Component {
-    render() {
-        return (
-            <div>
-                <p>{this.props.check}</p>
-            </div>
-        )
-    }
-}
 export default Grammar;
