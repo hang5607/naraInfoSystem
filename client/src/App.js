@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {withStyles} from '@material-ui/core/styles';
+import GrammarAdd from './components/GrammarAdd';
 
 
 const styles = theme => ({
@@ -28,9 +29,24 @@ const styles = theme => ({
 
 class App extends Component {
 
-  state = {
-    grammars: "",
-    completed: 0
+  constructor(props){
+    super(props);
+    this.state = {
+      grammars: "",
+      completed: 0
+    }
+  }
+
+  //state 초기화
+  stateRefresh = () => {
+    this.setState({
+      grammars: '',
+      completed: 0
+    });
+    //고객 목록을 다시 불러와야 하기 때문에 필요한 부분.
+    this.callApi()
+      .then(res => this.setState({grammars: res}))
+      .catch(err => console.log(err));
   }
 
   componentDidMount() {
@@ -55,29 +71,33 @@ class App extends Component {
     const { classes } = this.props;
 
     return (
-      <Paper className={classes.root}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>번호</TableCell>
-              <TableCell>문법</TableCell>
-              <TableCell>비고</TableCell>
-              <TableCell>확인</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.grammars ? this.state.grammars.map(c => {
-              return <Grammar key={c.id} id={c.id} content={c.content} comment={c.comment} check={c.check}/>
-            }) : 
-            <TableRow>
-              <TableCell colSpan="4" align="center">
-                <CircularProgress className={classes.progress} variant="determinate" value={this.state.completed} />
-              </TableCell>
-            </TableRow>
-            }
-          </TableBody>
-        </Table>
-      </Paper>
+      <div>
+        <Paper className={classes.root}>
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell>번호</TableCell>
+                <TableCell>문법</TableCell>
+                <TableCell>비고</TableCell>
+                <TableCell>확인</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.grammars ? this.state.grammars.map(c => {
+                return <Grammar key={c.id} id={c.id} content={c.content} comment={c.comment} check={c.check}/>
+              }) : 
+              <TableRow>
+                <TableCell colSpan="4" align="center">
+                  <CircularProgress className={classes.progress} variant="determinate" value={this.state.completed} />
+                </TableCell>
+              </TableRow>
+              }
+            </TableBody>
+          </Table>
+        </Paper>
+        <GrammarAdd stateRefresh={this.stateRefresh}/>
+      </div>
+      
     );
   }
 }
