@@ -6,11 +6,9 @@ class GrammarAdd extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            file: null,
             content: '',
             comment: '',
             check: '',
-            fileName: ''
         }
     }
 
@@ -19,6 +17,7 @@ class GrammarAdd extends React.Component {
         this.addGrammar()
             .then((response) => {
                 console.log(response.data);
+                //데이터 목록은 비동기화이기 때문에 데이터를 DB에 insert 한 후에 refresh
                 this.props.stateRefresh();
             })
         this.setState({

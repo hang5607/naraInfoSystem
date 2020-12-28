@@ -80,11 +80,12 @@ class App extends Component {
                 <TableCell>문법</TableCell>
                 <TableCell>비고</TableCell>
                 <TableCell>확인</TableCell>
+                <TableCell>설정</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {this.state.grammars ? this.state.grammars.map(c => {
-                return <Grammar key={c.id} id={c.id} content={c.content} comment={c.comment} check={c.check}/>
+                return <Grammar stateRefresh={this.stateRefresh} key={c.id} id={c.id} content={c.content} comment={c.comment} check={c.check}/>
               }) : 
               <TableRow>
                 <TableCell colSpan="4" align="center">
