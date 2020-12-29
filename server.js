@@ -43,9 +43,7 @@ app.post('/api/grammars', (req,res) => {
     let comment = req.body.comment;
     let check = req.body.check;
     let params = [content,comment,check];
-    console.log(content);
-    console.log(comment);
-    console.log(check);
+    
     connection.query(sql,params,
         (err,rows,fields) => {
             res.send(rows);

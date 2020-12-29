@@ -6,13 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
-    hidden: {
-        display: 'none'
-    }
-})
 
 
 class GrammarAdd extends React.Component {
@@ -88,14 +82,15 @@ class GrammarAdd extends React.Component {
     render() {
         return (
             <div>
-                <Button variant="contained" color="primary" onClick={this.handleClickOpen}>문법 추가하기
+                <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
+                    문법 추가하기
                 </Button>
                 <Dialog open={this.state.open} onClose={this.handleClose}>
-                    <DialogTitle>문법 추가</DialogTitle>
+                    <DialogTitle>고객 추가</DialogTitle>
                     <DialogContent>
-                        <TextField label="문법" type="text" name="content" value={this.state.content} onChange={this.handleValueChange} /><br/>
+                        <TextField label="문법" type="text" name="content" value={this.state.content} onChange={this.handleValueChange}/><br/>
                         <TextField label="비고" type="text" name="comment" value={this.state.comment} onChange={this.handleValueChange}/><br/>
-                        <TextField label="확인 여부" type="text" name="check" value={this.state.check} onChange={this.handleValueChange} /><br/>
+                        <TextField label="확인 여부" type="text" name="check" value={this.state.check} onChange={this.handleValueChange}/><br/>
                     </DialogContent>
                     <DialogActions>
                         <Button variant="contained" color="primary" onClick={this.handleFormSubmit}>추가</Button>
